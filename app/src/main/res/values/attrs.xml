@@ -11,4 +11,8 @@
 
         <attr name="insetForegroundBild" format="reference|color" />
     </declare-styleable>
+
+    <attr name="ic_action_home" format="reference" />
+    <attr name="ic_action_navigation_collapse" format="reference" />
+    <attr name="ic_action_navigation_expand" format="reference" />
 </resources >
