@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abdlh.axelspringerhack.Model.Element;
+import com.abdlh.axelspringerhack.Model.PointOfInterest;
 import com.abdlh.axelspringerhack.Model.PointsOfInterestInteractorImpl;
 import com.abdlh.axelspringerhack.Presenters.PointsOfInterestPresenter;
 import com.abdlh.axelspringerhack.Presenters.PointsOfInterestPresenterImpl;
@@ -109,6 +110,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         }
         buildGoogleApiClient();
         pointsOfInterestPresenter = new PointsOfInterestPresenterImpl(this, new PointsOfInterestInteractorImpl());
+        fillList();
     }
 
 
@@ -132,12 +134,13 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         mSwipeRefreshLayout.setColorSchemeColors(R.color.red, R.color.red, R.color.red, R.color.red);
         mSwipeRefreshLayout.setEnabled(true);
 
-        prepareArticleAdapter(mPoiList);
+        prepareArticleAdapter();
         return view;
     }
     
-    private void prepareArticleAdapter(List<Element<?>> mPoiList)
+    private void prepareArticleAdapter()
     {
+        fillList();
         lociAdapter = new LociAdapter(mPoiList, getActivity());
         getRecyclerView().setAdapter(lociAdapter);
 /*        articleAdapter.setCallbacks(new ArticleAdapter.Callbacks()
@@ -217,5 +220,14 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
 
+    }
+
+    private void fillList()
+    {
+        for (int y = 0; y == 10; y++)
+        {
+            mPoiList.add(new PointOfInterest("AxelSpringer Hackathon"+ y, "http://www.axelspringerhackday.de/wp-content/uploads/2015/05/head-ashd.png", y));
+        Log.d(TAG, "list length "+ mPoiList.size());
+        }
     }
 }

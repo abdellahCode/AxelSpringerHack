@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.abdlh.axelspringerhack.Model.Element;
@@ -42,7 +43,12 @@ public class LociAdapter extends RecyclerView.Adapter<ViewHolder>
     @Override
     public void onBindViewHolder(ViewHolder holder, int position)
     {
+//        ((ViewHolderExt) holder).setSelectionState(selectionStates.get(position));
 
+
+        final Element<?> element = mPoiList.get(position);
+        ((ViewHolderExt) holder).bind(element, position);
+        Log.d("LociAdapter", "binding "+element.getViewHolderType().value +" on position " + position);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                 public void onResult(PlaceLikelihoodBuffer placeLikelihoods) {
                     PointOfInterest pointOfInterest = null;
                     for (PlaceLikelihood placeLikelihood : placeLikelihoods) {
-                        pointOfInterest = new PointOfInterest();
+                        pointOfInterest = new PointOfInterest(null, null, 0);
                         if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_ART_GALLERY | Place.TYPE_LIBRARY
                                 | Place.TYPE_MUSEUM | Place.TYPE_PAINTER | Place.TYPE_UNIVERSITY)) {
 

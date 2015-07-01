@@ -21,10 +21,20 @@ public class PointOfInterest extends Element {
         this.type = type;
     }
 
-    public PointOfInterest(){
-
+    public PointOfInterest(String s, String s1, int i){
+        viewHolderType = ViewHolderType.POI;
     }
-    public PointOfInterest(Location location, String name, String imageUrl, Float distance, Element.type type)
+
+    public PointOfInterest(String name, String imageUrl, Float distance)
+    {
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.distance = distance;
+        viewHolderType = ViewHolderType.POI;
+        this.type = type;
+    }
+
+    public PointOfInterest(Location location, String name, String imageUrl, Float distance)
     {
         this.location = location;
         this.name = name;
