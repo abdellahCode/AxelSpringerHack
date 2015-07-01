@@ -2,6 +2,9 @@ package com.abdlh.axelspringerhack.Model;
 
 import android.location.Location;
 
+import com.abdlh.axelspringerhack.UI.Listners.onLoadingListner;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.List;
 
 /**
@@ -9,5 +12,5 @@ import java.util.List;
  */
 public interface PointsOfInterestInteractor {
 
-    List<Element<?>> fetchPointsOfInterests(Location location);
+    void fetchPointsOfInterests(GoogleApiClient googleApiClient, onLoadingListner onLoadingListner);
 }

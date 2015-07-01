@@ -1,4 +1,4 @@
-package com.abdlh.axelspringerhack.Presenters;
+package com.abdlh.axelspringerhack.UI.Adapters;
 
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;

@@ -18,6 +18,11 @@
             android:id="@+id/recyclerView1"
             android:scrollbars="vertical"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TESTING"
+            android:id="@+id/testing"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
