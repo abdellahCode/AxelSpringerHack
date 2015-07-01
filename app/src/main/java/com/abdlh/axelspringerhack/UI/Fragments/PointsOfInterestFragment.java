@@ -54,6 +54,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     @Override
     public void setPointsOfInterest(List<Element<?>> mPoiList) {
         this.mPoiList = mPoiList;
+        prepareArticleAdapter();
     }
 
     @Override
@@ -89,7 +90,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
      * @return A new instance of fragment MainFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PointsOfInterestFragment newInstance(List<Element<?>> mPoiList, String param2) {
+    public static PointsOfInterestFragment newInstance(String mPoiList, String param2) {
         PointsOfInterestFragment fragment = new PointsOfInterestFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM2, param2);
@@ -110,7 +111,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         }
         buildGoogleApiClient();
         pointsOfInterestPresenter = new PointsOfInterestPresenterImpl(this, new PointsOfInterestInteractorImpl());
-        fillList();
+        //fillList();
     }
 
 
@@ -133,24 +134,15 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(R.color.red, R.color.red, R.color.red, R.color.red);
         mSwipeRefreshLayout.setEnabled(true);
-
-        prepareArticleAdapter();
         return view;
     }
     
     private void prepareArticleAdapter()
     {
-        fillList();
+        //fillList();
         lociAdapter = new LociAdapter(mPoiList, getActivity());
         getRecyclerView().setAdapter(lociAdapter);
-/*        articleAdapter.setCallbacks(new ArticleAdapter.Callbacks()
-        {
-            @Override
-            public void onRefreshRequested()
-            {
-                executeUserRefreshRequest();
-            }
-        });*/
+
         getRecyclerView().setVisibility(View.VISIBLE);
         setHasOptionsMenu(true);
     }
