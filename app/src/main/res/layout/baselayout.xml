@@ -22,18 +22,11 @@ FrameLayouts einzuhalten; andernfalls werden die TouchEvents nicht korrekt deleg
         android:layout_height="match_parent"
         android:background="@color/grey_e">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentTop="true" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
+            android:layout_alignParentTop="true"
             android:orientation="vertical">
 
 
@@ -47,6 +40,12 @@ FrameLayouts einzuhalten; andernfalls werden die TouchEvents nicht korrekt deleg
 
 
         </LinearLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true" />
 
     </RelativeLayout>
 

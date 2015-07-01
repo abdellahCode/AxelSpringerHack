@@ -55,18 +55,15 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
 
     }
 
-    protected void initActionBar()
-    {
+    protected void initActionBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null)
-        {
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
+            toolbar.setTitle("");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.mipmap.menu_orange);
 
         }
-
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(false);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
         if (mPoi != null)
         {
             ViewUtils.setTextOrHide(mPoi.getName(), title);
-            ViewUtils.setTextOrHide(mPoi.getDistance() + " km", distance);
+            ViewUtils.setTextOrHide(mPoi.getDistance() == null ? "145 m" :  mPoi.getDistance() + " m", distance);
 
             Picasso.with(itemView.getContext()).load(mPoi.getImageUrl()).into(imageView);
         }
