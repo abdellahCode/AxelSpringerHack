@@ -6,6 +6,9 @@
 
     <string name="no_data">Es stehen leider keine Daten zur Verfügung oder das Netzwerk ist nicht verfügbar.</string>
     <string name="no_server">Es konnte keine Verbindung zum Server hergestellt werden.</string>
+    <string name="drawer_open">Navigationsmenü öffnen</string>
+    <string name="drawer_close">Navigationsmenü schließen</string>
+
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
