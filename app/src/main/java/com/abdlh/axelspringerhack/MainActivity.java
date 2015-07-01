@@ -1,20 +1,46 @@
 package com.abdlh.axelspringerhack;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.abdlh.axelspringerhack.UI.Fragments.PointsOfInterestFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setContentView(R.layout.baselayout);
+        initActionBar();
+        showPoiListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, PointsOfInterestFragment.newInstance("", "")).commit();
+
+    }
+
+    protected void initActionBar()
+    {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null)
+        {
+            setSupportActionBar(toolbar);
+
+        }
+
+        final ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
     }
 
     @Override
@@ -37,5 +63,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showPoiListFragment()
+    {
+        final FragmentManager mg = getSupportFragmentManager();
+        Fragment fragment = mg.findFragmentByTag(PointsOfInterestFragment.class.getSimpleName());
+        if (fragment == null)
+        {
+            final PointsOfInterestFragment poiListFragment = new PointsOfInterestFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_fragment, poiListFragment, PointsOfInterestFragment.class.getSimpleName());
+            transaction.addToBackStack(PointsOfInterestFragment.class.getSimpleName());
+            transaction.commit();
+//            Log.d(TAG, "MeineBildFragment added to backstack");
+        }
+
     }
 }
