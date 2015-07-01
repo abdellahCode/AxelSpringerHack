@@ -9,6 +9,16 @@ public abstract class Element<T> {
 
     protected ViewHolderFactory.ViewHolderType viewHolderType;
     protected String name;
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     protected enum type{
         SPORT(0),
         CULTURE(1),

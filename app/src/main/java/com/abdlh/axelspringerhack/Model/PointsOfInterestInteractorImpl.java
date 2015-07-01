@@ -1,10 +1,9 @@
 package com.abdlh.axelspringerhack.Model;
 
 import android.graphics.Bitmap;
-import android.location.Location;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.abdlh.axelspringerhack.UI.Listners.onLoadingListner;
 import com.abdlh.axelspringerhack.gettyConnectSDK.connectsdk.ConnectSdk;
@@ -17,27 +16,38 @@ import com.google.android.gms.location.places.PlaceFilter;
 import com.google.android.gms.location.places.PlaceLikelihood;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by Abdellah on 7/1/15.
  */
 public class PointsOfInterestInteractorImpl implements PointsOfInterestInteractor {
     String TAG = "POI Interactor";
-
+    final List<Element<?>> elementList = new ArrayList<>();
+    onLoadingListner onLoadingListner;
+    final OkHttpClient okHttpClient = new OkHttpClient();
 
     @Override
     public void fetchPointsOfInterests(GoogleApiClient googleApiClient, final onLoadingListner onLoadingListner) {
         final StringBuilder stringBuilder = new StringBuilder();
         PendingResult<PlaceLikelihoodBuffer> mPlaces;
         PlaceFilter placeFilter = new PlaceFilter();
-        final List<Element<?>> elementList = new ArrayList<>();
+        this.onLoadingListner = onLoadingListner;
         mPlaces = Places.PlaceDetectionApi.getCurrentPlace(googleApiClient, null);
         if (mPlaces != null) {
             mPlaces.setResultCallback(new ResultCallback<PlaceLikelihoodBuffer>() {
@@ -80,7 +90,7 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.HOTEL);
                         } else {
-                            pointOfInterest.setName("NOTHING");
+                            pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                         }
 
                         elementList.add(pointOfInterest);
@@ -93,78 +103,52 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                                 placeLikelihood.getPlace().getName(),
                                 placeLikelihood.getLikelihood()) + "\n");
                     }
-                    onLoadingListner.onElementsLoaded(elementList);
+                    String[] keywords = new String[2];
+                    for (int i = 0; i < elementList.size(); i++) {
+                        StringTokenizer st = new StringTokenizer(elementList.get(i).getName(), " ");
+                        for (int j = 0; j < 2; j++) {
+                            if (st.hasMoreTokens())
+                                keywords[j] = st.nextToken();
+                        }
+                        Request request = new Request.Builder().url("https://api.qwant.com/api/search/images?count=1&locale=de_de&offset=1&q=" + keywords[0] + "%20" + keywords[1]).build();
+                        final int finalI = i;
+                        okHttpClient.newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Request request, IOException e) {
+                                Log.d("OKHTTP", "OKHTTP ERROR: " + e.getMessage());
+                                if (finalI == elementList.size() - 1)
+                                    onLoadingListner.onElementsLoaded(elementList);
+
+
+                            }
+
+                            @Override
+                            public void onResponse(Response response) throws IOException {
+                                String s = response.body().string();
+                                try {
+                                    JSONObject jo = new JSONObject(s);
+                                    String url = jo.getJSONObject("data").getJSONObject("result").getJSONArray("items").getJSONObject(0).getString("media");
+                                    Log.d("OKHTTP", "OKHTTP WORKING URL: " + url);
+                                    elementList.get(finalI).setImageUrl(url);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (finalI == elementList.size() - 1)
+                                    onLoadingListner.onElementsLoaded(elementList);
+                            }
+                        });
+
+
+                    }
+                    //new SearchTask().execute();
                     placeLikelihoods.release();
                 }
             });
         } else
             onLoadingListner.onError();
+
+
     }
+
+
 }
-
- /*   private class SearchTask extends AsyncTask<String, Void, String>
-    {
-        private Bitmap firstBitmap;
-
-        @Override
-        protected String doInBackground(String... searchTerm) {
-            String result;
-            try {
-                ConnectSdk connectSdk = new ConnectSdk(apiKey, apiSecret);
-                result = connectSdk.Search().Images().Creative().WithPhrase(searchTerm[0]).WithPage(10).ExecuteAsync();
-
-                try {
-                    JSONObject json = (JSONObject) new JSONObject(result);
-
-                    JSONArray images = json.getJSONArray("images");
-
-                    JSONObject image = images.getJSONObject(0);
-
-                    JSONArray displaySizes = image.getJSONArray("display_sizes");
-
-                    JSONObject displaySize = displaySizes.getJSONObject(0);
-
-                    String firstImageUri = displaySize.getString("uri");
-
-                    firstBitmap = getBitmapFromURL(firstImageUri);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                //result = connectSdk.Images().WithId("92823652").WithId("92822221").WithId("OneNotFound").WithField("artist").WithField("license_model").ExecuteAsync();
-                //result = connectSdk.Download().WithId("92822221").ExecuteAsync();
-            } catch (SdkException e) {
-                result = e.getMessage();
-            }
-            catch (Exception e) {
-                result = e.toString();
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result)
-        {
-            TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText(result);
-
-            ImageView imageView = (ImageView)findViewById(R.id.imageView);
-            imageView.setImageBitmap(firstBitmap);
-        }
-        public Bitmap getBitmapFromURL(String src) {
-            try {
-                URL url = new URL(src);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                return myBitmap;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-    }*/
