@@ -9,7 +9,7 @@
                 android:paddingTop="3dip" >
 
 
-    <com.abdlh.axelspringerhack.UI.Views.BildImageView
+    <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -38,6 +38,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout >
-    </com.abdlh.axelspringerhack.UI.Views.BildImageView >
+    </ImageView >
 
 </RelativeLayout >
