@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.ViewGroup;
 
 import com.abdlh.axelspringerhack.Model.Element;
+import com.abdlh.axelspringerhack.Model.Image;
+import com.abdlh.axelspringerhack.R;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderExt;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory.ViewHolderType;
@@ -26,6 +28,8 @@ public class LociAdapter extends RecyclerView.Adapter<ViewHolder>
     public LociAdapter(List<Element<?>> mPoiList, FragmentActivity activity)
     {
         this.mPoiList = mPoiList;
+        mPoiList.add(5, new Image(R.raw.soundcloud1, ""));
+        mPoiList.add(10, new Image(R.raw.soundcloud2, "This is a title"));
         this.mActivity = activity;
     }
 

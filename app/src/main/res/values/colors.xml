@@ -63,7 +63,7 @@
 
     <color name="brand_bild">#dd0000</color>
     <color name="orange_hack">#99ffbb33</color>
-    <color name="orange_hack_full">#ffffbb33</color>
+    <color name="orange_hack_full">#fffd6e18</color>
 
     <color name="breaking_news_text">@android:color/white</color>
     <color name="breaking_news_separator">#777</color>

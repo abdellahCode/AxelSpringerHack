@@ -26,7 +26,13 @@ public class ViewHolderFactory {
 
             case POI:
                 viewHolder = new PointOfInterestViewHolder(inflate(R.layout.viewholder_poi, viewGroup));
-                Log.d(TAG, "poi viewholder");
+                break;
+            case IMAGE:
+                viewHolder = new ImageViewHolder(inflate(R.layout.viewholder_image, viewGroup));
+                break;
+            case HORIZONTAL_GALLERY:
+                break;
+            case UNKNOWN:
                 break;
         }
 
@@ -50,6 +56,8 @@ public class ViewHolderFactory {
     public enum ViewHolderType{
 
         POI("pointOfInterest"),
+        IMAGE("image"),
+        HORIZONTAL_GALLERY("horizontal_gallery"),
         UNKNOWN("Unknown");
 
         public final String value;

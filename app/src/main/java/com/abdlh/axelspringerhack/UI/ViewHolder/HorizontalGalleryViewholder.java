@@ -1,6 +1,5 @@
 package com.abdlh.axelspringerhack.UI.ViewHolder;
 
-import android.location.LocationManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,13 +13,13 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by ckohlwag on 01.07.15.
  */
-public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
+public class HorizontalGalleryViewholder extends ViewHolderExt<PointOfInterest>
 {
     final ImageView imageView;
     final TextView title;
     final TextView distance;
 
-    public PointOfInterestViewHolder(View itemView)
+    public HorizontalGalleryViewholder(View itemView)
     {
         super(itemView);
 
@@ -37,9 +36,10 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
         if (mPoi != null)
         {
             ViewUtils.setTextOrHide(mPoi.getName(), title);
-            ViewUtils.setTextOrHide(mPoi.getDistance() == null ? "145 m" :  mPoi.getDistance() + " m", distance);
+            ViewUtils.setTextOrHide(mPoi.getDistance() + " km", distance);
 
             Picasso.with(itemView.getContext()).load(mPoi.getImageUrl()).into(imageView);
         }
     }
+
 }
