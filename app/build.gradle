@@ -29,4 +29,5 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.caverock:androidsvg:1.2.2-beta-1'
 }

@@ -83,7 +83,6 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public static PointsOfInterestFragment newInstance(List<Element<?>> mPoiList, String param2) {
         PointsOfInterestFragment fragment = new PointsOfInterestFragment();
         Bundle args = new Bundle();
-
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;

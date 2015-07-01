@@ -2,6 +2,8 @@ package com.abdlh.axelspringerhack.Model;
 
 import android.location.Location;
 
+import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory.ViewHolderType;
+
 /**
  * Created by Abdellah on 6/30/15.
  */
@@ -17,7 +19,10 @@ public class PointOfInterest extends Element {
         this.title = title;
         this.imageUrl = imageUrl;
         this.distance = distance;
+        viewHolderType = ViewHolderType.POI;
     }
+
+
 
     public Location getLocation() {
         return location;
