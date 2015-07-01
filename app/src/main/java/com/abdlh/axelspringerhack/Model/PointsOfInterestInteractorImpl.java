@@ -21,12 +21,14 @@ import java.util.List;
  */
 public class PointsOfInterestInteractorImpl implements PointsOfInterestInteractor {
     String TAG = "POI Interactor";
+
+
     @Override
     public void fetchPointsOfInterests(GoogleApiClient googleApiClient, final onLoadingListner onLoadingListner) {
         final StringBuilder stringBuilder = new StringBuilder();
         PendingResult<PlaceLikelihoodBuffer> mPlaces;
         PlaceFilter placeFilter = new PlaceFilter();
-        final List<Element> elementList = new ArrayList<>();
+        final List<Element<?>> elementList = new ArrayList<>();
         mPlaces = Places.PlaceDetectionApi.getCurrentPlace(googleApiClient, null);
         if (mPlaces != null)
         {

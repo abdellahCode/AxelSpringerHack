@@ -27,14 +27,15 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter,
 
     PointsOfInterestView pointsOfInterestView;
     PointsOfInterestInteractor pointsOfInterestInteractor;
+
+
     public PointsOfInterestPresenterImpl(PointsOfInterestView pointsOfInterestView, PointsOfInterestInteractor pointsOfInterestInteractor){
         this.pointsOfInterestView = pointsOfInterestView;
         this.pointsOfInterestInteractor = pointsOfInterestInteractor;
     }
     @Override
-    public List<Element<?>> getElements(GoogleApiClient googleApiClient) {
+    public void getElements(GoogleApiClient googleApiClient) {
         pointsOfInterestInteractor.fetchPointsOfInterests(googleApiClient, this);
-        return null;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter,
 
     @Override
     public void onElementsLoaded(List<Element<?>> elementList) {
-
+        pointsOfInterestView.setPointsOfInterest(elementList);
     }
 
     @Override
