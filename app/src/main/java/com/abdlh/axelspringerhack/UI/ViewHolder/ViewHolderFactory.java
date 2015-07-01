@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.abdlh.axelspringerhack.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Abdellah on 6/30/15.
  */
@@ -46,7 +49,8 @@ public class ViewHolderFactory {
 
     public enum ViewHolderType{
 
-        POI("pointOfInterest");
+        POI("pointOfInterest"),
+        UNKNOWN("Unknown");
 
         public final String value;
 
@@ -54,5 +58,37 @@ public class ViewHolderFactory {
         {
             this.value = value;
         }
+
+        private final static Map<String, ViewHolderType> nodeTypes = new HashMap<>();
+        private final static Map<ViewHolderType, Integer> nodeTypeIndex = new HashMap<>();
+
+        private static final String TAG = ViewHolderType.class.getSimpleName();
+
+        static
+        {
+            int index = 0;
+            for (ViewHolderType nodeType : ViewHolderType.values())
+            {
+                nodeTypes.put(nodeType.value, nodeType);
+                nodeTypeIndex.put(nodeType, index++);
+            }
+        }
+
+        public static ViewHolderType byValue(String value)
+        {
+            ViewHolderType nodeType = nodeTypes.get(value);
+            if (nodeType != null)
+            {
+                return nodeType;
+            }
+            Log.w(TAG, "Found unknown node type: " + value);
+            return UNKNOWN;
+        }
+
+        public static int indexOf(ViewHolderType nodeType)
+        {
+            return nodeTypeIndex.get(nodeType);
+        }
+
     }
 }

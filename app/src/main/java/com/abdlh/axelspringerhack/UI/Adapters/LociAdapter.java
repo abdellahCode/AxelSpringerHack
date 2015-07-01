@@ -12,6 +12,7 @@ import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderExt;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory.ViewHolderType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,7 @@ public class LociAdapter extends RecyclerView.Adapter<ViewHolder>
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         final ViewHolderExt<?> viewHolder;
+        Log.d("LociAdapter", "onCreateViewHolder");
             final ViewHolderFactory.ViewHolderType viewHolderType = ViewHolderType.values()[viewType];
             viewHolder = ViewHolderFactory.getViewHolder(parent, viewHolderType);
 //            viewHolder.setOnSelectedChangedListener(this);
@@ -54,6 +56,18 @@ public class LociAdapter extends RecyclerView.Adapter<ViewHolder>
     @Override
     public int getItemCount()
     {
-        return 0;
+        return mPoiList == null ? 0 : mPoiList.size();
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        final ViewHolderType viewType = mPoiList.get(position).getViewHolderType();
+        final int result;
+
+            // No ad - just map nodetype to viewtype:
+            result = ViewHolderType.indexOf(viewType);
+
+        return result;
     }
 }
