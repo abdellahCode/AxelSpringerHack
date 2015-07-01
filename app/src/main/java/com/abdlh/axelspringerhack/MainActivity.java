@@ -19,9 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.abdlh.axelspringerhack.UI.Fragments.DetailsFragment;
 import com.abdlh.axelspringerhack.UI.Fragments.PointsOfInterestFragment;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements fragment_click
 {
 
     private Toolbar toolbar;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
         initActionBar();
         //showPoiListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, PointsOfInterestFragment.newInstance("", "")).commit();
+        //onclick();
 
     }
 
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity
             setSupportActionBar(toolbar);
             toolbar.setTitle("");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationIcon(R.mipmap.menu_orange);
+            //toolbar.setNavigationIcon(R.mipmap.menu_weiss);
 
         }
     }
@@ -170,6 +172,12 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 //            Log.d(TAG, "MeineBildFragment added to backstack");
         }
+
+    }
+
+    @Override
+    public void onclick() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(this, "")).commit();
 
     }
 }

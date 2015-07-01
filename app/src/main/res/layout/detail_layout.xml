@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/image"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-pro"
+        android:padding="5dp"
+        android:text="Brandenburger Tor"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="News"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@android:color/holo_red_dark"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_margin="7dp"
+            android:layout_weight="1.0"
+            android:padding="5dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kommen Sie"
+                android:id="@+id/title1"
+                android:maxLines="2"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:id="@+id/text1"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:text="Wer würde dieses Zimmer mit Sensationsaussicht nicht gern buchen – zumal das knackige Upgrade am rechten Bildrand einen besonders heißen Aufenthalt verspricht."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:id="@+id/domain1"
+                android:layout_marginTop="10dp"
+                android:text="Bild.de"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_margin="7dp"
+            android:padding="5dp"
+            android:layout_weight="1.0"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="Kommen Sie"
+                android:id="@+id/title2"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:id="@+id/text2"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:text="Wer würde dieses Zimmer mit Sensationsaussicht nicht gern buchen – zumal das knackige Upgrade am rechten Bildrand einen besonders heißen Aufenthalt verspricht."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/domain2"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginTop="10dp"
+                android:text="Welt.de"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@android:color/holo_blue_light"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_margin="7dp"
+            android:layout_weight="1.0"
+            android:padding="5dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kommen Sie"
+                android:id="@+id/soctitle1"
+                android:maxLines="2"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:id="@+id/soctext1"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:text="Wer würde dieses Zimmer mit Sensationsaussicht nicht gern buchen – zumal das knackige Upgrade am rechten Bildrand einen besonders heißen Aufenthalt verspricht."/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/socdomain"
+                android:scaleType="fitStart"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:src="@mipmap/twitter"
+                android:layout_marginTop="30dp"
+                android:text="Welt.de"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_margin="7dp"
+            android:padding="5dp"
+            android:layout_weight="1.0"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="Kommen Sie"
+                android:id="@+id/soctitle2"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:id="@+id/soctext2"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:text="Wer würde dieses Zimmer mit Sensationsaussicht nicht gern buchen – zumal das knackige Upgrade am rechten Bildrand einen besonders heißen Aufenthalt verspricht."/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/socdomain2"
+                android:scaleType="fitStart"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:src="@mipmap/twitter"
+                android:layout_marginTop="30dp"
+                android:text="Welt.de"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+    </ScrollView>

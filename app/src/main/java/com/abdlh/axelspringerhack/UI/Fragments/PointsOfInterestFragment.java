@@ -23,15 +23,12 @@ import com.abdlh.axelspringerhack.Presenters.PointsOfInterestPresenterImpl;
 import com.abdlh.axelspringerhack.UI.Adapters.LociAdapter;
 import com.abdlh.axelspringerhack.R;
 import com.abdlh.axelspringerhack.UI.Listners.onLoadingListner;
+import com.abdlh.axelspringerhack.fragment_click;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceFilter;
-import com.google.android.gms.location.places.PlaceLikelihood;
-import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
 
 import java.util.List;
@@ -51,6 +48,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     private LociAdapter lociAdapter;
     private List<Element<?>> mPoiList;
     public PointsOfInterestPresenter pointsOfInterestPresenter;
+    public fragment_click fragment_click;
     @Override
     public void setPointsOfInterest(List<Element<?>> mPoiList) {
         this.mPoiList = mPoiList;
@@ -157,12 +155,12 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        fragment_click = (fragment_click) activity;
 
     }
 
