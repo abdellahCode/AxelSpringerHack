@@ -34,8 +34,8 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter,
         this.pointsOfInterestInteractor = pointsOfInterestInteractor;
     }
     @Override
-    public void getElements(GoogleApiClient googleApiClient) {
-        pointsOfInterestInteractor.fetchPointsOfInterests(googleApiClient, this);
+    public void getElements(GoogleApiClient googleApiClient, Context context) {
+        pointsOfInterestInteractor.fetchPointsOfInterests(googleApiClient, this, context);
     }
 
     @Override

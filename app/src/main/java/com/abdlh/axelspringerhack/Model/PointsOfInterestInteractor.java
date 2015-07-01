@@ -1,5 +1,6 @@
 package com.abdlh.axelspringerhack.Model;
 
+import android.content.Context;
 import android.location.Location;
 
 import com.abdlh.axelspringerhack.UI.Listners.onLoadingListner;
@@ -12,5 +13,5 @@ import java.util.List;
  */
 public interface PointsOfInterestInteractor {
 
-    void fetchPointsOfInterests(GoogleApiClient googleApiClient, onLoadingListner onLoadingListner);
+    void fetchPointsOfInterests(GoogleApiClient googleApiClient, onLoadingListner onLoadingListner, Context contexts);
 }

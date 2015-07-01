@@ -198,7 +198,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             Toast.makeText(getActivity(), "Got the location --> Lat: " + mLastLocation.getLatitude() + " and Lng: " + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-            pointsOfInterestPresenter.getElements(mGoogleApiClient);
+            pointsOfInterestPresenter.getElements(mGoogleApiClient, getActivity());
         }
     }
 

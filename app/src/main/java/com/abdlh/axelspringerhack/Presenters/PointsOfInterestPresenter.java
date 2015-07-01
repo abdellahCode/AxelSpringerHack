@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Abdellah on 7/1/15.
  */
 public interface PointsOfInterestPresenter {
-    void  getElements(GoogleApiClient googleApiClient);
+    void  getElements(GoogleApiClient googleApiClient, Context context);
     void onStart(Context context);
     void onItemClick(Element<?> element, Context context);
 }

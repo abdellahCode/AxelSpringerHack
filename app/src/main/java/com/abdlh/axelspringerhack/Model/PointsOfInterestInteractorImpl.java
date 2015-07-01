@@ -1,8 +1,10 @@
 package com.abdlh.axelspringerhack.Model;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 
 import com.abdlh.axelspringerhack.UI.Listners.onLoadingListner;
@@ -41,9 +43,9 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
     final List<Element<?>> elementList = new ArrayList<>();
     onLoadingListner onLoadingListner;
     final OkHttpClient okHttpClient = new OkHttpClient();
-
+    int size = 0;
     @Override
-    public void fetchPointsOfInterests(GoogleApiClient googleApiClient, final onLoadingListner onLoadingListner) {
+    public void fetchPointsOfInterests(GoogleApiClient googleApiClient, final onLoadingListner onLoadingListner, final Context context) {
         final StringBuilder stringBuilder = new StringBuilder();
         PendingResult<PlaceLikelihoodBuffer> mPlaces;
         PlaceFilter placeFilter = new PlaceFilter();
@@ -111,13 +113,12 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                                 keywords[j] = st.nextToken();
                         }
                         Request request = new Request.Builder().url("https://api.qwant.com/api/search/images?count=1&locale=de_de&offset=1&q=" + keywords[0] + "%20" + keywords[1]).build();
-                        final int finalI = i;
+                        final Handler mainHandler = new Handler(context.getMainLooper());
                         okHttpClient.newCall(request).enqueue(new Callback() {
                             @Override
                             public void onFailure(Request request, IOException e) {
                                 Log.d("OKHTTP", "OKHTTP ERROR: " + e.getMessage());
-                                if (finalI == elementList.size() - 1)
-                                    onLoadingListner.onElementsLoaded(elementList);
+                                size++;
 
 
                             }
@@ -129,17 +130,28 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                                     JSONObject jo = new JSONObject(s);
                                     String url = jo.getJSONObject("data").getJSONObject("result").getJSONArray("items").getJSONObject(0).getString("media");
                                     Log.d("OKHTTP", "OKHTTP WORKING URL: " + url);
-                                    elementList.get(finalI).setImageUrl(url);
+                                    elementList.get(size).setImageUrl(url);
+                                    size++;
+                                    if (size == elementList.size()) {
+                                        mainHandler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                onLoadingListner.onElementsLoaded(elementList);
+                                            }
+                                        });
+                                    }
+
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                if (finalI == elementList.size() - 1)
-                                    onLoadingListner.onElementsLoaded(elementList);
+
                             }
                         });
 
 
                     }
+
                     //new SearchTask().execute();
                     placeLikelihoods.release();
                 }
