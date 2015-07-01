@@ -51,6 +51,8 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     private LociAdapter lociAdapter;
     private List<Element<?>> mPoiList;
     public PointsOfInterestPresenter pointsOfInterestPresenter;
+
+
     @Override
     public void setPointsOfInterest(List<Element<?>> mPoiList) {
         this.mPoiList = mPoiList;
