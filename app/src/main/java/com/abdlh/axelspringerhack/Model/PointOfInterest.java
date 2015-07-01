@@ -6,8 +6,18 @@ import android.location.Location;
  * Created by Abdellah on 6/30/15.
  */
 public class PointOfInterest extends Element {
-    Location location;
-    String Text;
+    private Location location;
+    private String title;
+    private String imageUrl;
+    private Float distance;
+
+    public PointOfInterest(Location location, String title, String imageUrl, Float distance)
+    {
+        this.location = location;
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.distance = distance;
+    }
 
     public Location getLocation() {
         return location;
@@ -18,10 +28,10 @@ public class PointOfInterest extends Element {
     }
 
     public String getText() {
-        return Text;
+        return title;
     }
 
     public void setText(String text) {
-        Text = text;
+        title = text;
     }
 }

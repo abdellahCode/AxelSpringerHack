@@ -7,8 +7,8 @@ import android.view.ViewGroup;
  * Created by Abdellah on 6/30/15.
  */
 public class ViewHolderFactory {
-    public static RecyclerView.ViewHolder getViewHolder(ViewGroup viewGroup, ViewHolderType viewHolderType){
-        RecyclerView.ViewHolder viewHolder = null;
+    public static ViewHolderExt getViewHolder(ViewGroup viewGroup, ViewHolderType viewHolderType){
+        ViewHolderExt viewHolder = null;
 
         switch (viewHolderType){
         }

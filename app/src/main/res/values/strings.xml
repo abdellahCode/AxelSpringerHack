@@ -4,6 +4,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="no_data">Es stehen leider keine Daten zur Verfügung oder das Netzwerk ist nicht verfügbar.</string>
+    <string name="no_server">Es konnte keine Verbindung zum Server hergestellt werden.</string>
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
