@@ -21,11 +21,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setContentView(R.layout.baselayout);
         initActionBar();
         showPoiListFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, PointsOfInterestFragment.newInstance("", "")).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, PointsOfInterestFragment.newInstance("", "")).commit();
 
     }
 

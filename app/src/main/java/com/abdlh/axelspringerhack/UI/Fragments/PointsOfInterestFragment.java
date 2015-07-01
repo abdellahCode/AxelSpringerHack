@@ -35,7 +35,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
 
     @Override
     public void showLoading() {
-        progressDialog = ProgressDialog.show(getActivity(), "Medics","Loading", true);
+        progressDialog = ProgressDialog.show(getActivity(), "Point of interest","Loading", true);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter{
 
     @Override
     public List<Element<?>> getElements(onLoadingListner onLoadingListner) {
-
+        return null;
     }
 
     @Override
