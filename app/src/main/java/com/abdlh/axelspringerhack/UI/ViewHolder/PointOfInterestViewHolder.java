@@ -1,11 +1,13 @@
 package com.abdlh.axelspringerhack.UI.ViewHolder;
 
+import android.location.LocationManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abdlh.axelspringerhack.Model.PointOfInterest;
 import com.abdlh.axelspringerhack.R;
+import com.abdlh.axelspringerhack.Utils.ViewUtils;
 import com.squareup.picasso.Picasso;
 
 
@@ -31,16 +33,11 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
     @Override
     public void onBind(PointOfInterest mPoi, int position)
     {
-        if (mPoi.getName() == null)
-        {
-            title.setText("TestTitle");
-        }
-        else
-        {
-            title.setText(mPoi.getName());
-        }
-        distance.setText(mPoi.getDistance()+ " km");
-        Picasso.with(itemView.getContext()).load("http://www.axelspringerhackday.de/wp-content/uploads/2015/05/head-ashd.png").into(imageView);
+
+        ViewUtils.setTextOrHide(mPoi.getName(), title);
+        ViewUtils.setTextOrHide(mPoi.getDistance()+ " km", distance);
+
+        Picasso.with(itemView.getContext()).load(mPoi.getImageUrl()).into(imageView);
     }
 
 }

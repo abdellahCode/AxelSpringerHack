@@ -10,6 +10,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.RawRes;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -229,6 +230,36 @@ public abstract class ViewUtils
         }
 
         return drawable;
+    }
+
+    /**
+     * Sets the given {@link CharSequence} if not empty or <code>null</code>,
+     * otherwise the visibility of the {@link TextView} will be changed to
+     * {@link View#GONE}.
+     *
+     * @param charSequence the {@link CharSequence} to set
+     * @param textView     the associated {@link TextView}
+     * @return <code>true<code>, if the {@link CharSequence} could be set, otherwise <code>false</code>
+     * .
+     */
+    public static boolean setTextOrHide(final CharSequence charSequence,
+                                        final TextView textView)
+    {
+        boolean result = false;
+        if (textView != null)
+        {
+            if (TextUtils.isEmpty(charSequence))
+            {
+                textView.setVisibility(View.GONE);
+            }
+            else
+            {
+                textView.setText(charSequence);
+                textView.setVisibility(View.VISIBLE);
+                result = true;
+            }
+        }
+        return result;
     }
 
     /*public static int getStatusBarHeight(final Context context)

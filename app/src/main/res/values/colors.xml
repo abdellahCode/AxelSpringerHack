@@ -46,7 +46,7 @@
 
     <color name="transparent">@android:color/transparent</color>
     <color name="white">@android:color/white</color>
-    <color name="white_selected">#f6f6f6</color>
+    <color name="white_selected">#88f6f6f6</color>
     <color name="grey_10">#e5e5e5</color>
     <color name="grey_50">#808080</color>
     <color name="grey_80">#333</color>
@@ -62,6 +62,8 @@
     <color name="grey_e">#e2e2e2</color>
 
     <color name="brand_bild">#dd0000</color>
+    <color name="orange_hack">#99ffbb33</color>
+    <color name="orange_hack_full">#ffffbb33</color>
 
     <color name="breaking_news_text">@android:color/white</color>
     <color name="breaking_news_separator">#777</color>
