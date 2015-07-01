@@ -15,7 +15,7 @@
         android:layout_height="250dp"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
-        android:scaleType="fitCenter" >
+        android:scaleType="fitCenter" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -38,6 +38,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout >
-    </ImageView >
+
 
 </RelativeLayout >
