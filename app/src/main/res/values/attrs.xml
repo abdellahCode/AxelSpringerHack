@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+
+    <declare-styleable name="ScrimInsetsView">
+        <!--
+        TG: The foreground of the insets (rectangular area defined by fitsSystemWindow, e. g. the native system toolbar window).
+        Changing the toolbar behaviour requires specific window features introduced in Android 4.x and 5.x - so it's not backported!
+
+        ckohlwag: renamed due to incompatibility with com.android.support:design
+        -->
+
+        <attr name="insetForegroundBild" format="reference|color" />
+    </declare-styleable>
+</resources >

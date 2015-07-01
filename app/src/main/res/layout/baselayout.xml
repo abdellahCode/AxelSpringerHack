@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Achtung! Die Reihenfolge von Menue- und Content-Bereich sind innerhalb des 
+FrameLayouts einzuhalten; andernfalls werden die TouchEvents nicht korrekt delegiert.
+-->
+
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:fitsSystemWindows="false"
+    tools:context=".MainActivity">
+
+    <!-- The main content view -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_e">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:orientation="vertical">
+
+
+            <!-- Fragment benoetigt Hintergrund f. default text und progress bar -->
+            <FrameLayout
+                android:id="@+id/content_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                tools:context=".ui.activities.StageFragment" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- The drawer -->
+    <include
+        android:id="@+id/left_pane"
+        layout="@layout/drawer" />
+
+</android.support.v4.widget.DrawerLayout>

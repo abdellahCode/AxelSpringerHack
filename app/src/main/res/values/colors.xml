@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <color name="status_bar">#AA000000</color>
+
+    <color name="red">#FFDD0808</color>
+    <color name="light_red">#FFFF0A0A</color>
+
+    <color name="splash_grey">#ffeeeeee</color>
+    <color name="dark_grey">@color/grey_3</color>
+    <color name="light_grey">#fff7f7f5</color>
+    <color name="light_grey2">#ffdddddd</color>
+    <color name="bild_action_bar_grau">#e2e2e2</color>
+    <color name="dark_grey2">#FF888888</color>
+    <color name="dark_grey_oct">#FF555555</color>
+    <color name="light_grey_oct">#FFaaaaaa</color>
+
+    <color name="bild_selector_pressed">#16000000</color>
+
+    <color name="twittertext_lightGrey">#707070</color>
+    <color name="twittertext_darkGrey">#292f33</color>
+    <color name="twitter_blue">#4099FF</color>
+
+    <color name="orange">#FFFF9933</color>
+    <color name="yellow">#FFFFFF00</color>
+    <color name="green">#FF019023</color>
+    <color name="blue_buli">#079ac8</color>
+
+    <color name="specialform_bg_grey">#ffeeeeee</color>
+    <color name="specialform_divider">#ffaaaaaa</color>
+
+    <color name="drawer_background">#010101</color>
+    <color name="drawer_divider">#444444</color>
+    <color name="drawer_menu_allgemein">@color/grey_3</color>
+    <color name="drawer_menu_ressorts">#2D2D2D</color>
+    <color name="drawer_menu_service">#232323</color>
+    <color name="drawer_menu_startseite">#3F3F3F</color>
+
+    <color name="live_message_background">@android:color/white</color>
+    <color name="live_message_shadow">#1a000000</color>
+    <color name="live_message_highlight">#dd0000</color>
+    <color name="live_message_inset">#333</color>
+
+    <drawable name="translucent_background">#66000000</drawable>
+
+    <color name="transparent">@android:color/transparent</color>
+    <color name="white">@android:color/white</color>
+    <color name="white_selected">#f6f6f6</color>
+    <color name="grey_10">#e5e5e5</color>
+    <color name="grey_50">#808080</color>
+    <color name="grey_80">#333</color>
+    <color name="black">@android:color/black</color>
+
+    <color name="placeholder">#efefef</color>
+    <color name="article_image_view_bg">@color/placeholder</color>
+
+    <color name="grey_3">#333</color>
+    <color name="grey_4">#444</color>
+    <color name="grey_7">#777</color>
+    <color name="grey_b">#bbb</color>
+    <color name="grey_e">#e2e2e2</color>
+
+    <color name="brand_bild">#dd0000</color>
+
+    <color name="breaking_news_text">@android:color/white</color>
+    <color name="breaking_news_separator">#777</color>
+    <!--
+    <color name="breaking_news_background_normal">#222</color>
+    <color name="breaking_news_background_focused">@color/grey_70</color>
+    <color name="breaking_news_background_pressed">@android:color/black</color>
+    -->
+</resources>
