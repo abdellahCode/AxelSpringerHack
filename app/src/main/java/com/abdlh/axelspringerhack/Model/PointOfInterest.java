@@ -10,8 +10,17 @@ import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory.ViewHolderType
 public class PointOfInterest extends Element {
     private Location location;
     private String title;
-    private String imageUrl;
+
+
+
     private Float distance;
+    private String imageUrl;
+
+    public PointOfInterest()
+    {
+
+    };
+
 
     public PointOfInterest(Location location, String title, String imageUrl, Float distance)
     {
@@ -34,6 +43,16 @@ public class PointOfInterest extends Element {
 
     public String getText() {
         return title;
+    }
+
+    public Float getDistance()
+    {
+        return distance;
+    }
+
+    public void setDistance(Float distance)
+    {
+        this.distance = distance;
     }
 
     public void setText(String text) {

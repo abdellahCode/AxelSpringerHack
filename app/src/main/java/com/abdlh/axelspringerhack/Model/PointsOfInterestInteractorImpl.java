@@ -27,7 +27,7 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
         PendingResult<PlaceLikelihoodBuffer> mPlaces;
         PlaceFilter placeFilter = new PlaceFilter();
         final List<Element> elementList = new ArrayList<>();
-        final PointOfInterest pointOfInterest;
+        PointOfInterest pointOfInterest;
         mPlaces = Places.PlaceDetectionApi.getCurrentPlace(googleApiClient, null);
         if (mPlaces != null)
         {
@@ -40,7 +40,7 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             //pointOfInterest.set
                         }
-                        elementList
+//                        elementList
                         //| Place.TYPE_AMUSEMENT_PARK | Place.TYPE_AQUARIUM))
                         Log.d(TAG, String.format("Place '%s' has likelihood: %g",
                                 placeLikelihood.getPlace().getName(),
