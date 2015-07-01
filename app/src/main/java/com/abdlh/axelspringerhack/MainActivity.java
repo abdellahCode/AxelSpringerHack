@@ -18,16 +18,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import com.abdlh.axelspringerhack.Model.PointOfInterest;
+import com.abdlh.axelspringerhack.UI.Adapters.DetailFragmentEventListener;
 
 import com.abdlh.axelspringerhack.UI.Fragments.DetailsFragment;
 import com.abdlh.axelspringerhack.UI.Fragments.PointsOfInterestFragment;
+import com.abdlh.axelspringerhack.UI.Fragments.DetailsFragment;
+import com.abdlh.axelspringerhack.UI.Fragments.PointsOfInterestFragment;
 
-public class MainActivity extends AppCompatActivity implements fragment_click
-{
+public class MainActivity extends AppCompatActivity implements fragment_click {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    public static PointOfInterest detailPoi;
+
+    public static PointOfInterest getDetailPoi()
+    {
+        return detailPoi;
+    }
+
+    public static void setDetailPoi(PointOfInterest detailPoi)
+    {
+        MainActivity.detailPoi = detailPoi;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -122,42 +137,43 @@ public class MainActivity extends AppCompatActivity implements fragment_click
 
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * Initializes the sliding menu drawer.
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void initDrawer()
     {
-    drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-    drawerLayout.setFocusableInTouchMode(true);
+        drawerLayout.setFocusableInTouchMode(true);
 
-    drawerLayout.setDrawerShadow(R.drawable.drawer_shadow,GravityCompat.START);
-    TypedArray ta = obtainStyledAttributes(new int[] {R.attr.ic_action_home});
-    int homeResId = ta.getResourceId(0, 0);
-    ta.recycle();
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        TypedArray ta = obtainStyledAttributes(new int[] {R.attr.ic_action_home});
+        int homeResId = ta.getResourceId(0, 0);
+        ta.recycle();
 
-    actionBarDrawerToggle=new
+        actionBarDrawerToggle = new
 
-    ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
+            ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
 
-    {
-        @Override
-        public void onDrawerClosed (View view)
-        {
-            super.onDrawerClosed(view);
-            supportInvalidateOptionsMenu();
-        }
+            {
+                @Override
+                public void onDrawerClosed(View view)
+                {
+                    super.onDrawerClosed(view);
+                    supportInvalidateOptionsMenu();
+                }
 
-        @Override
-        public void onDrawerOpened (View drawerView)
-        {
-            super.onDrawerOpened(drawerView);
-            supportInvalidateOptionsMenu();
-        }
-    };
-    drawerLayout.setDrawerListener(actionBarDrawerToggle);
-}
+                @Override
+                public void onDrawerOpened(View drawerView)
+                {
+                    super.onDrawerOpened(drawerView);
+                    supportInvalidateOptionsMenu();
+                }
+            };
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+    }
 
     private void showPoiListFragment()
     {
@@ -172,12 +188,40 @@ public class MainActivity extends AppCompatActivity implements fragment_click
             transaction.commit();
 //            Log.d(TAG, "MeineBildFragment added to backstack");
         }
+    }
 
+    public void showDetailFragment(final PointOfInterest mPoi)
+    {
+
+        final FragmentManager mg = getSupportFragmentManager();
+        Fragment fragment = mg.findFragmentByTag(DetailsFragment.class.getSimpleName());
+        if (fragment == null)
+        {
+            final DetailsFragment detailsFragment = new DetailsFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_fragment, detailsFragment, DetailsFragment.class.getSimpleName());
+            transaction.addToBackStack(DetailsFragment.class.getSimpleName());
+            transaction.commit();
+//            Log.d(TAG, "MeineBildFragment added to backstack");
+        } else
+        {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_fragment, fragment, DetailsFragment.class.getSimpleName());
+            transaction.addToBackStack(DetailsFragment.class.getSimpleName());
+            transaction.commit();
+        }
+    }
+
+
+
+    public void handleDetails(final PointOfInterest mPoi)
+    {
+        setDetailPoi(mPoi);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(this, "")).commit();
     }
 
     @Override
     public void onclick() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(this, "")).commit();
 
     }
 }

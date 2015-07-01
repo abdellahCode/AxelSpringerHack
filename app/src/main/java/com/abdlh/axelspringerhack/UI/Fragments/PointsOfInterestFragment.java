@@ -49,6 +49,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     private List<Element<?>> mPoiList;
     public PointsOfInterestPresenter pointsOfInterestPresenter;
     public fragment_click fragment_click;
+
     @Override
     public void setPointsOfInterest(List<Element<?>> mPoiList) {
         this.mPoiList = mPoiList;

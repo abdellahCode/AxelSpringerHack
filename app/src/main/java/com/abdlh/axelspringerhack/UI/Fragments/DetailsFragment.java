@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdlh.axelspringerhack.MainActivity;
 import com.abdlh.axelspringerhack.Model.DetailInteractorImpl;
 import com.abdlh.axelspringerhack.Presenters.DetailsPresenter;
 import com.abdlh.axelspringerhack.Presenters.DetailsPresenterImpl;
@@ -44,10 +45,7 @@ import butterknife.ButterKnife;
 
 public class DetailsFragment extends Fragment implements PointsOfInterestView, SwipeRefreshLayout.OnRefreshListener {
 
-    private PointOfInterest mPoi;
     public static String TAG = "PointsOfInterestFragment";
-    protected GoogleApiClient mGoogleApiClient;
-    public Location mLastLocation;
     ProgressBar progressBar;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -113,7 +111,7 @@ public class DetailsFragment extends Fragment implements PointsOfInterestView, S
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            //mPoi = getArguments().getParcelable("poi");
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         detailPresenter = new DetailsPresenterImpl(this, new DetailInteractorImpl());
@@ -121,7 +119,6 @@ public class DetailsFragment extends Fragment implements PointsOfInterestView, S
 
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -167,7 +164,6 @@ public class DetailsFragment extends Fragment implements PointsOfInterestView, S
         getRecyclerView().setVisibility(View.VISIBLE);
         setHasOptionsMenu(true);
     }
-
 
     private RecyclerView getRecyclerView()
     {

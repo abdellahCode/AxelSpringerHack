@@ -2,9 +2,11 @@ package com.abdlh.axelspringerhack.UI.ViewHolder;
 
 import android.location.LocationManager;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.abdlh.axelspringerhack.MainActivity;
 import com.abdlh.axelspringerhack.Model.PointOfInterest;
 import com.abdlh.axelspringerhack.R;
 import com.abdlh.axelspringerhack.Utils.ViewUtils;
@@ -31,7 +33,7 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
     }
 
     @Override
-    public void onBind(PointOfInterest mPoi, int position)
+    public void onBind(final PointOfInterest mPoi, int position)
     {
 
         if (mPoi != null)
@@ -41,5 +43,14 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
 
             Picasso.with(itemView.getContext()).load(mPoi.getImageUrl()).into(imageView);
         }
+
+        itemView.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                
+            }
+        });
     }
 }
