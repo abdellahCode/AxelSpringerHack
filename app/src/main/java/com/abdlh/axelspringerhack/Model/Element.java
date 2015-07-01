@@ -9,6 +9,18 @@ public abstract class Element<T> {
 
     protected ViewHolderFactory.ViewHolderType viewHolderType;
     protected String name;
+    protected enum type{
+        SPORT(0),
+        CULTURE(1),
+        SHOPPING(2),
+        FOOD(3),
+        ACTIVITIES(4),
+        RELIGION(5),
+        HOTEL(6);
+
+        type(int i) {
+        }
+    }
 
     public ViewHolderFactory.ViewHolderType getViewHolderType() {
         return viewHolderType;
