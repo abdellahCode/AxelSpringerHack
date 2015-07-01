@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity
         if (toolbar != null)
         {
             setSupportActionBar(toolbar);
+            toolbar.setTitle("");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.mipmap.menu_orange);
 
         }
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
     }
 
     @Override

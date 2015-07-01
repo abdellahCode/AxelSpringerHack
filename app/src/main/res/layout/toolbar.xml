@@ -6,8 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/orange_hack_full"
+    android:background="#40ffffff"
     android:layerType="software"
     android:minHeight="?attr/actionBarSize"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
+    app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LOCI"
+        android:textColor="@color/orange_hack_full"
+        android:textStyle="bold"
+        android:textSize="34sp"/>
+</android.support.v7.widget.Toolbar>
