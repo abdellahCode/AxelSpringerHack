@@ -1,11 +1,11 @@
 package com.abdlh.axelspringerhack.UI.ViewHolder;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abdlh.axelspringerhack.Model.PointOfInterest;
 import com.abdlh.axelspringerhack.R;
-import com.abdlh.axelspringerhack.UI.Views.BildImageView;
 import com.squareup.picasso.Picasso;
 
 
@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
  */
 public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
 {
-    final BildImageView imageView;
+    final ImageView imageView;
     final TextView title;
     final TextView distance;
 
@@ -22,7 +22,7 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
     {
         super(itemView);
 
-        imageView = (BildImageView) itemView.findViewById(R.id.image);
+        imageView = (ImageView) itemView.findViewById(R.id.image);
         title = (TextView) itemView.findViewById(R.id.title);
         distance = (TextView) itemView.findViewById(R.id.distance);
 
