@@ -58,7 +58,9 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                     PointOfInterest pointOfInterest = null;
                     for (PlaceLikelihood placeLikelihood : placeLikelihoods) {
                         pointOfInterest = new PointOfInterest(null, null, 0);
-                        if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_ART_GALLERY | Place.TYPE_LIBRARY
+                        List<Integer> list = new ArrayList<>();
+                        list = placeLikelihood.getPlace().getPlaceTypes();
+                        if (list.contains(Place.TYPE_ART_GALLERY | Place.TYPE_LIBRARY
                                 | Place.TYPE_MUSEUM | Place.TYPE_PAINTER | Place.TYPE_UNIVERSITY)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
@@ -74,7 +76,7 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.RELIGION);
                         } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_SHOPPING_MALL | Place.TYPE_SHOE_STORE
-                                | Place.TYPE_CONVENIENCE_STORE | Place.TYPE_JEWELRY_STORE)) {
+                                | Place.TYPE_CONVENIENCE_STORE | Place.TYPE_JEWELRY_STORE | Place.TYPE_GROCERY_OR_SUPERMARKET | Place.TYPE_BOOK_STORE)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.SHOPPING);
@@ -87,7 +89,7 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.SPORT);
-                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_CAMPGROUND)) {
+                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_CAMPGROUND | Place.TYPE_LODGING)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.HOTEL);
