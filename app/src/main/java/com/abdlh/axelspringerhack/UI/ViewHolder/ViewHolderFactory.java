@@ -3,6 +3,7 @@ package com.abdlh.axelspringerhack.UI.ViewHolder;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import com.abdlh.axelspringerhack.R;
  * Created by Abdellah on 6/30/15.
  */
 public class ViewHolderFactory {
+    private static final String TAG = ViewHolderFactory.class.getSimpleName();
+
     public static ViewHolderExt getViewHolder(ViewGroup viewGroup, ViewHolderType viewHolderType){
         ViewHolderExt viewHolder = null;
 
@@ -20,6 +23,7 @@ public class ViewHolderFactory {
 
             case POI:
                 viewHolder = new PointOfInterestViewHolder(inflate(R.layout.viewholder_poi, viewGroup));
+                Log.d(TAG, "poi viewholder");
                 break;
         }
 

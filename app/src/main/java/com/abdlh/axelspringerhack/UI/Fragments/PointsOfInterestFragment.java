@@ -134,12 +134,13 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         mSwipeRefreshLayout.setColorSchemeColors(R.color.red, R.color.red, R.color.red, R.color.red);
         mSwipeRefreshLayout.setEnabled(true);
 
-        prepareArticleAdapter(mPoiList);
+        prepareArticleAdapter();
         return view;
     }
     
-    private void prepareArticleAdapter(List<Element<?>> mPoiList)
+    private void prepareArticleAdapter()
     {
+        fillList();
         lociAdapter = new LociAdapter(mPoiList, getActivity());
         getRecyclerView().setAdapter(lociAdapter);
 /*        articleAdapter.setCallbacks(new ArticleAdapter.Callbacks()
@@ -225,7 +226,8 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     {
         for (int y = 0; y == 10; y++)
         {
-            mPoiList.add(new PointOfInterest(null, "AxelSpringer Hackathon"+ y, "http://www.axelspringerhackday.de/wp-content/uploads/2015/05/head-ashd.png", (float) y));
+            mPoiList.add(new PointOfInterest("AxelSpringer Hackathon"+ y, "http://www.axelspringerhackday.de/wp-content/uploads/2015/05/head-ashd.png", y));
+        Log.d(TAG, "list length "+ mPoiList.size());
         }
     }
 }

@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by Abdellah on 7/1/15.
  */
-public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter{
+public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter, onLoadingListner{
 
     PointsOfInterestView pointsOfInterestView;
     PointsOfInterestInteractor pointsOfInterestInteractor;
@@ -33,7 +33,9 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter{
     }
     @Override
     public List<Element<?>> getElements(GoogleApiClient googleApiClient) {
-            }
+        pointsOfInterestInteractor.fetchPointsOfInterests(googleApiClient, this);
+        return null;
+    }
 
     @Override
     public void onStart(Context context)
@@ -43,6 +45,16 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter{
 
     public void onItemClick(Element<?> element, Context context)
     {
+
+    }
+
+    @Override
+    public void onElementsLoaded(List<Element<?>> elementList) {
+
+    }
+
+    @Override
+    public void onError() {
 
     }
 }

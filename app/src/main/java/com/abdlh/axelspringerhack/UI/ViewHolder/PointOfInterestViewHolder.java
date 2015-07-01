@@ -31,7 +31,14 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
     @Override
     public void onBind(PointOfInterest mPoi, int position)
     {
-        title.setText(mPoi.getText());
+        if (mPoi.getName() == null)
+        {
+            title.setText("TestTitle");
+        }
+        else
+        {
+            title.setText(mPoi.getName());
+        }
         distance.setText(mPoi.getDistance()+ " km");
         Picasso.with(itemView.getContext()).load("http://www.axelspringerhackday.de/wp-content/uploads/2015/05/head-ashd.png").into(imageView);
     }
