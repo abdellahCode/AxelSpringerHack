@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.abdlh.axelspringerhack.UI.Fragments.PointsOfInterestFragment;
 
-
 public class MainActivity extends AppCompatActivity
 {
 
@@ -22,9 +21,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         setContentView(R.layout.baselayout);
         initActionBar();
         showPoiListFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, PointsOfInterestFragment.newInstance("", "")).commit();
+
     }
 
     protected void initActionBar()
