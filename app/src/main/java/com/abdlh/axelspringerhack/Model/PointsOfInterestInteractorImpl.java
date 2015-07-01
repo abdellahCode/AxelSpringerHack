@@ -60,36 +60,39 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                         pointOfInterest = new PointOfInterest(null, null, 0);
                         List<Integer> list = new ArrayList<>();
                         list = placeLikelihood.getPlace().getPlaceTypes();
-                        if (list.contains(Place.TYPE_ART_GALLERY | Place.TYPE_LIBRARY
-                                | Place.TYPE_MUSEUM | Place.TYPE_PAINTER | Place.TYPE_UNIVERSITY)) {
+                        if (list.contains(Place.TYPE_ART_GALLERY) || list.contains(Place.TYPE_LIBRARY)
+                                || list.contains(Place.TYPE_MUSEUM) || list.contains(Place.TYPE_PAINTER) || list.contains(Place.TYPE_UNIVERSITY)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.CULTURE);
-                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_AQUARIUM | Place.TYPE_AMUSEMENT_PARK
-                                | Place.TYPE_BOWLING_ALLEY | Place.TYPE_BAR | Place.TYPE_CAFE | Place.TYPE_CASINO | Place.TYPE_SPA)) {
+                        } else if (list.contains(Place.TYPE_AQUARIUM) || list.contains(Place.TYPE_AMUSEMENT_PARK)
+                                || list.contains(Place.TYPE_BOWLING_ALLEY) || list.contains(Place.TYPE_BAR) || list.contains(Place.TYPE_CAFE)
+                                || list.contains(Place.TYPE_CASINO) || list.contains(Place.TYPE_SPA)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.ACTIVITIES);
-                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_CHURCH | Place.TYPE_MOSQUE
-                                | Place.TYPE_SYNAGOGUE | Place.TYPE_HINDU_TEMPLE | Place.TYPE_PLACE_OF_WORSHIP)) {
+                        } else if (list.contains(Place.TYPE_CHURCH) || list.contains(Place.TYPE_MOSQUE)
+                                || list.contains(Place.TYPE_SYNAGOGUE) || list.contains(Place.TYPE_HINDU_TEMPLE)
+                                || list.contains(Place.TYPE_PLACE_OF_WORSHIP)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.RELIGION);
-                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_SHOPPING_MALL | Place.TYPE_SHOE_STORE
-                                | Place.TYPE_CONVENIENCE_STORE | Place.TYPE_JEWELRY_STORE | Place.TYPE_GROCERY_OR_SUPERMARKET | Place.TYPE_BOOK_STORE)) {
+                        } else if (list.contains(Place.TYPE_SHOPPING_MALL) || list.contains(Place.TYPE_SHOE_STORE)
+                                || list.contains(Place.TYPE_CONVENIENCE_STORE) || list.contains(Place.TYPE_JEWELRY_STORE)
+                                || list.contains(Place.TYPE_GROCERY_OR_SUPERMARKET) || list.contains(Place.TYPE_BOOK_STORE)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.SHOPPING);
-                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_CAFE | Place.TYPE_FOOD
-                                | Place.TYPE_RESTAURANT)) {
+                        } else if (list.contains(Place.TYPE_CAFE) || list.contains(Place.TYPE_FOOD)
+                                || list.contains(Place.TYPE_RESTAURANT)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.FOOD);
-                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_STADIUM | Place.TYPE_GYM)) {
+                        } else if (list.contains(Place.TYPE_STADIUM) || list.contains( Place.TYPE_GYM)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.SPORT);
-                        } else if (placeLikelihood.getPlace().getPlaceTypes().contains(Place.TYPE_CAMPGROUND | Place.TYPE_LODGING)) {
+                        } else if (list.contains(Place.TYPE_CAMPGROUND) || list.contains(Place.TYPE_LODGING)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.HOTEL);
