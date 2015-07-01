@@ -1,9 +1,7 @@
 package com.abdlh.axelspringerhack.UI.Fragments;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,24 +12,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abdlh.axelspringerhack.Model.Element;
-import com.abdlh.axelspringerhack.Presenters.LociAdapter;
+import com.abdlh.axelspringerhack.Model.PointsOfInterestInteractorImpl;
+import com.abdlh.axelspringerhack.Presenters.PointsOfInterestPresenter;
+import com.abdlh.axelspringerhack.Presenters.PointsOfInterestPresenterImpl;
+import com.abdlh.axelspringerhack.UI.Adapters.LociAdapter;
 import com.abdlh.axelspringerhack.R;
+import com.abdlh.axelspringerhack.UI.Listners.onLoadingListner;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceFilter;
+import com.google.android.gms.location.places.PlaceLikelihood;
+import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
+import com.google.android.gms.location.places.Places;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
-
-
-
-public class PointsOfInterestFragment extends Fragment implements PointsOfInterestView, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, SwipeRefreshLayout.OnRefreshListener  {
+public class PointsOfInterestFragment extends Fragment implements PointsOfInterestView, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static String TAG = "PointsOfInterestFragment";
     protected GoogleApiClient mGoogleApiClient;
@@ -41,7 +49,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LociAdapter lociAdapter;
     private List<Element<?>> mPoiList;
-
+    public PointsOfInterestPresenter pointsOfInterestPresenter;
     @Override
     public void setPointsOfInterest(List<Element<?>> mPoiList) {
         this.mPoiList = mPoiList;
@@ -101,6 +109,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         buildGoogleApiClient();
+        pointsOfInterestPresenter = new PointsOfInterestPresenterImpl(this, new PointsOfInterestInteractorImpl());
     }
 
 
@@ -108,10 +117,10 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 //        View view = inflater.inflate(R.layout.fragment_main, container, false);
-//        ButterKnife.inject(this, view);
+//
 
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
-
+        ButterKnife.inject(this, view);
         progressBar = (ProgressBar) view.findViewById(android.R.id.progress);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView1);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.str_layout);
@@ -186,6 +195,8 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
                 .build();
     }
 
@@ -194,8 +205,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             Toast.makeText(getActivity(), "Got the location --> Lat: " + mLastLocation.getLatitude() + " and Lng: " + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getActivity(), "Location Error", Toast.LENGTH_LONG).show();
+            pointsOfInterestPresenter.getElements(mGoogleApiClient);
         }
     }
 
