@@ -19,15 +19,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.abdlh.axelspringerhack.Model.PointOfInterest;
 import com.abdlh.axelspringerhack.UI.Adapters.DetailFragmentEventListener;
 
 import com.abdlh.axelspringerhack.UI.Fragments.DetailsFragment;
 import com.abdlh.axelspringerhack.UI.Fragments.PointsOfInterestFragment;
+import com.abdlh.axelspringerhack.UI.Fragments.DetailsFragment;
+import com.abdlh.axelspringerhack.UI.Fragments.PointsOfInterestFragment;
 
-public class MainActivity extends AppCompatActivity implements DetailFragmentEventListener
-{
+public class MainActivity extends AppCompatActivity implements fragment_click {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
         initActionBar();
         //showPoiListFragment();
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, PointsOfInterestFragment.newInstance("", "")).commit();
+        //onclick();
+
 
         if (getIntent().getBundleExtra("extras") == null)
         {
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
             setSupportActionBar(toolbar);
             toolbar.setTitle("");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationIcon(R.mipmap.menu_orange);
+            //toolbar.setNavigationIcon(R.mipmap.menu_weiss);
 
         }
     }
@@ -218,31 +221,19 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
 
     public void showDetailFragment(final String name)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(name, "")).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(this, name)).commit();
     }
 
-    @Override
-    public void toggleProgress(boolean inProgress)
-    {
-
-    }
 
 
     public void handleDetails(final PointOfInterest mPoi)
     {
         setDetailPoi(mPoi);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance("", "")).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(this, "")).commit();
     }
 
     @Override
-    public void popCurrentFragmentFromBackStack()
-    {
-
-    }
-
-    @Override
-    public void popBackStackToMeineBildFragment()
-    {
+    public void onclick() {
 
     }
 }
