@@ -28,8 +28,6 @@ public class LociAdapter extends RecyclerView.Adapter<ViewHolder>
     public LociAdapter(List<Element<?>> mPoiList, FragmentActivity activity)
     {
         this.mPoiList = mPoiList;
-        mPoiList.add(5, new Image(R.raw.soundcloud1, ""));
-        mPoiList.add(10, new Image(R.raw.soundcloud2, "This is a title"));
         this.mActivity = activity;
     }
 

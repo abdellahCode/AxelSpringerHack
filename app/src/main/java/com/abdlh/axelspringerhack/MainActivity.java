@@ -1,6 +1,7 @@
 package com.abdlh.axelspringerhack;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Build;
@@ -51,8 +52,12 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
         setContentView(R.layout.baselayout);
         initActionBar();
         //showPoiListFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, PointsOfInterestFragment.newInstance("", "")).commit();
 
+
+        if (getIntent().getBundleExtra("extras") == null)
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, PointsOfInterestFragment.newInstance("", "")).commit();
+        }
     }
 
     protected void initActionBar() {
@@ -64,6 +69,28 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
             toolbar.setNavigationIcon(R.mipmap.menu_orange);
 
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent)
+    {
+        this.setIntent(intent);
+        if (intent != null)
+        {
+            if (intent.getBundleExtra("extras") != null)
+            {
+                Bundle bundle = intent.getBundleExtra("extras");
+                if (bundle != null)
+                {
+                    if (bundle.getBoolean("detail"))
+                    {
+                        showDetailFragment(bundle.getString("name"));
+                    }
+                }
+            }
+
+        }
+        super.onNewIntent(intent);
     }
 
     @Override
@@ -81,11 +108,11 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
     public void onBackPressed()
     {
         // Überschreibt den Back-Button damit bei offenem Drawer nicht die App geschlossen wird, sondern der Drawer.
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else
+//        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+//        {
+//            drawerLayout.closeDrawer(GravityCompat.START);
+//        }
+//        else
         {
             super.onBackPressed();
         }
@@ -189,26 +216,9 @@ public class MainActivity extends AppCompatActivity implements DetailFragmentEve
         }
     }
 
-    public void showDetailFragment(final PointOfInterest mPoi)
+    public void showDetailFragment(final String name)
     {
-
-        final FragmentManager mg = getSupportFragmentManager();
-        Fragment fragment = mg.findFragmentByTag(DetailsFragment.class.getSimpleName());
-        if (fragment == null)
-        {
-            final DetailsFragment detailsFragment = new DetailsFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_fragment, detailsFragment, DetailsFragment.class.getSimpleName());
-            transaction.addToBackStack(DetailsFragment.class.getSimpleName());
-            transaction.commit();
-//            Log.d(TAG, "MeineBildFragment added to backstack");
-        } else
-        {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_fragment, fragment, DetailsFragment.class.getSimpleName());
-            transaction.addToBackStack(DetailsFragment.class.getSimpleName());
-            transaction.commit();
-        }
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(name, "")).commit();
     }
 
     @Override
