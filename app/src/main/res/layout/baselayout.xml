@@ -56,6 +56,7 @@ FrameLayouts einzuhalten; andernfalls werden die TouchEvents nicht korrekt deleg
         android:layout_height="match_parent"
         android:background="@color/white"
         android:layout_gravity="start"
+        app:itemTextColor="@android:color/black"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer"/>
 

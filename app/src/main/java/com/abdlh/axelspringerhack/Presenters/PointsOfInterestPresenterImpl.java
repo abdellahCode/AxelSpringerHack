@@ -35,6 +35,7 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter,
     }
     @Override
     public void getElements(GoogleApiClient googleApiClient, Context context) {
+        pointsOfInterestView.showLoading();
         pointsOfInterestInteractor.fetchPointsOfInterests(googleApiClient, this, context);
     }
 
@@ -52,10 +53,12 @@ public class PointsOfInterestPresenterImpl implements PointsOfInterestPresenter,
     @Override
     public void onElementsLoaded(List<Element<?>> elementList) {
         pointsOfInterestView.setPointsOfInterest(elementList);
+        pointsOfInterestView.hideLoading();
     }
 
     @Override
     public void onError() {
-
+        pointsOfInterestView.hideLoading();
+        pointsOfInterestView.onErrorLoading();
     }
 }

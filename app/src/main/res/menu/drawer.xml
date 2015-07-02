@@ -6,12 +6,28 @@
         <menu>
             <item
                 android:id="@+id/navigation_sub_item_1"
-                android:icon="@mipmap/logo_orange"
+                android:icon="@mipmap/activities_orange"
                 android:title="Activities"/>
             <item
                 android:id="@+id/navigation_sub_item_2"
-                android:icon="@mipmap/logo_orange"
+                android:icon="@mipmap/theater_orange"
                 android:title="Cultural"/>
+            <item
+                android:id="@+id/navigation_sub_item_3"
+                android:icon="@mipmap/restaurant_orange"
+                android:title="Food"/>
+            <item
+                android:id="@+id/navigation_sub_item_4"
+                android:icon="@mipmap/shopping_orange"
+                android:title="Shopping"/>
+            <item
+                android:id="@+id/navigation_sub_item_5"
+                android:icon="@mipmap/religion_orange"
+                android:title="Worship"/>
+            <item
+                android:id="@+id/navigation_sub_item_6"
+                android:icon="@mipmap/sports_orange"
+                android:title="Sport"/>
         </menu>
     </item>
 </menu >

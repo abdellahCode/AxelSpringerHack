@@ -1,6 +1,7 @@
 package com.abdlh.axelspringerhack.UI.Fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,13 +43,13 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public static String TAG = "PointsOfInterestFragment";
     protected GoogleApiClient mGoogleApiClient;
     public Location mLastLocation;
-    ProgressBar progressBar;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LociAdapter lociAdapter;
     private List<Element<?>> mPoiList;
     public PointsOfInterestPresenter pointsOfInterestPresenter;
     public fragment_click fragment_click;
+    ProgressDialog progressDialog;
 
     @Override
     public void setPointsOfInterest(List<Element<?>> mPoiList) {
@@ -58,13 +59,13 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
 
     @Override
     public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE); //= ProgressDialog.show(getActivity(), "Medics","Loading", true);
+        progressDialog = ProgressDialog.show(getActivity(), "Locations", "Discovering your surrounding..", true);
     }
 
     @Override
     public void hideLoading() {
-        if(progressBar != null)
-            progressBar.setVisibility(View.INVISIBLE);
+        if(progressDialog != null)
+            progressDialog.dismiss();
         else
             Log.e(TAG, "progressDialog shouldn't be null");
     }
@@ -87,7 +88,8 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        buildGoogleApiClient();
+        if(mGoogleApiClient == null || !mGoogleApiClient.isConnected())
+            buildGoogleApiClient();
         pointsOfInterestPresenter = new PointsOfInterestPresenterImpl(this, new PointsOfInterestInteractorImpl());
     }
 
@@ -98,7 +100,6 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
 
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.inject(this, view);
-        progressBar = (ProgressBar) view.findViewById(android.R.id.progress);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView1);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.str_layout);
 
@@ -129,7 +130,10 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     @Override
     public void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+        if(!mGoogleApiClient.isConnected())
+            mGoogleApiClient.connect();
+        else
+            setPointsOfInterest(mPoiList);
     }
 
     @Override
@@ -146,12 +150,10 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
 
     @Override
     public void onRefresh()
-        {
+        {}
 
-    }
-
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
@@ -170,7 +172,7 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public void onConnected(Bundle bundle) {
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-            Toast.makeText(getActivity(), "Got the location --> Lat: " + mLastLocation.getLatitude() + " and Lng: " + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Got the location --> Lat: " + mLastLocation.getLatitude() + " and Lng: " + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
             pointsOfInterestPresenter.getElements(mGoogleApiClient, getActivity());
         }
     }
