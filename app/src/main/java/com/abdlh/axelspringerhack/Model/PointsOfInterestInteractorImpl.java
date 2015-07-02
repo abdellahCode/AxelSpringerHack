@@ -88,7 +88,7 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.FOOD);
-                        } else if (list.contains(Place.TYPE_STADIUM) || list.contains( Place.TYPE_GYM)) {
+                        } else if (list.contains(Place.TYPE_STADIUM) || list.contains(Place.TYPE_GYM)) {
 
                             pointOfInterest.setName(placeLikelihood.getPlace().getName().toString());
                             pointOfInterest.setType(Element.type.SPORT);
@@ -110,22 +110,51 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                                 placeLikelihood.getPlace().getName(),
                                 placeLikelihood.getLikelihood()) + "\n");
                     }
-                    String[] keywords = new String[2];
-                    for (int i = 0; i < elementList.size(); i++) {
-                        StringTokenizer st = new StringTokenizer(elementList.get(i).getName(), " ");
-                        for (int j = 0; j < 2; j++) {
-                            if (st.hasMoreTokens())
-                                keywords[j] = st.nextToken();
-                        }
-                        Request request = new Request.Builder().url("https://api.qwant.com/api/search/images?count=1&locale=de_de&offset=1&q=" + keywords[0] + "%20" + keywords[1]).build();
+
                         final Handler mainHandler = new Handler(context.getMainLooper());
-                        okHttpClient.newCall(request).enqueue(new Callback() {
+                        new AsyncTask<Void, Void, Void>() {
+
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                String[] keywords = new String[2];
+                                for (int i = 0; i < elementList.size(); i++) {
+                                    StringTokenizer st = new StringTokenizer(elementList.get(i).getName(), " ");
+                                    for (int j = 0; j < 2; j++) {
+                                        if (st.hasMoreTokens())
+                                            keywords[j] = st.nextToken();
+                                    }
+                                    Request request = new Request.Builder().url("https://api.qwant.com/api/search/images?count=1&locale=de_de&offset=1&q=" + keywords[0] + "%20" + keywords[1]).build();
+
+                                    try {
+                                    Response response = okHttpClient.newCall(request).execute();
+                                    if (response.isSuccessful()) {
+                                        String s = response.body().string();
+                                        JSONObject jo = new JSONObject(s);
+                                        String url = jo.getJSONObject("data").getJSONObject("result").getJSONArray("items").getJSONObject(0).getString("media");
+                                        Log.d("OKHTTP", "OKHTTP WORKING URL: " + url);
+                                        elementList.get(i).setImageUrl(url);
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute (Void v){
+                            onLoadingListner.onElementsLoaded(elementList);
+                        }
+                    }.execute();
+
+ /*                       okHttpClient.newCall(request).enqueue(new Callback() {
                             @Override
                             public void onFailure(Request request, IOException e) {
                                 Log.d("OKHTTP", "OKHTTP ERROR: " + e.getMessage());
                                 size++;
-
-
                             }
 
                             @Override
@@ -152,11 +181,10 @@ public class PointsOfInterestInteractorImpl implements PointsOfInterestInteracto
                                 }
 
                             }
-                        });
+                        });*/
 
 
-                    }
-
+                    //}
                     //new SearchTask().execute();
                     placeLikelihoods.release();
                 }

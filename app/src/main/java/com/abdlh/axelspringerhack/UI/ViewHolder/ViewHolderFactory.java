@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.abdlh.axelspringerhack.R;
+import com.abdlh.axelspringerhack.fragment_click;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,13 +20,13 @@ import java.util.Map;
 public class ViewHolderFactory {
     private static final String TAG = ViewHolderFactory.class.getSimpleName();
 
-    public static ViewHolderExt getViewHolder(ViewGroup viewGroup, ViewHolderType viewHolderType){
+    public static ViewHolderExt getViewHolder(ViewGroup viewGroup, ViewHolderType viewHolderType, fragment_click fragment_click){
         ViewHolderExt viewHolder = null;
 
         switch (viewHolderType){
 
             case POI:
-                viewHolder = new PointOfInterestViewHolder(inflate(R.layout.viewholder_poi, viewGroup));
+                viewHolder = new PointOfInterestViewHolder(inflate(R.layout.viewholder_poi, viewGroup), fragment_click);
                 break;
             case IMAGE:
                 viewHolder = new ImageViewHolder(inflate(R.layout.viewholder_image, viewGroup));

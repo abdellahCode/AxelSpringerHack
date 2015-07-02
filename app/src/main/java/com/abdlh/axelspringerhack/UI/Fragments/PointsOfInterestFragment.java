@@ -73,27 +73,9 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public void onErrorLoading() {
         Toast.makeText(getActivity(), "Error loading data..", Toast.LENGTH_SHORT).show();
     }
-
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-
     public static PointsOfInterestFragment newInstance(String string, String param2) {
         PointsOfInterestFragment fragment = new PointsOfInterestFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -105,10 +87,6 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         buildGoogleApiClient();
         pointsOfInterestPresenter = new PointsOfInterestPresenterImpl(this, new PointsOfInterestInteractorImpl());
     }
@@ -117,8 +95,6 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_main, container, false);
-//
 
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.inject(this, view);
@@ -144,8 +120,6 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
         getRecyclerView().setVisibility(View.VISIBLE);
         setHasOptionsMenu(true);
     }
-
-
 
     private RecyclerView getRecyclerView()
     {
@@ -210,14 +184,5 @@ public class PointsOfInterestFragment extends Fragment implements PointsOfIntere
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
 
-    }
-
-    private void fillList()
-    {
-        for (int y = 0; y == 10; y++)
-        {
-            mPoiList.add(new PointOfInterest("AxelSpringer Hackathon"+ y, "http://www.axelspringerhackday.de/wp-content/uploads/2015/05/head-ashd.png", y));
-        Log.d(TAG, "list length "+ mPoiList.size());
-        }
     }
 }

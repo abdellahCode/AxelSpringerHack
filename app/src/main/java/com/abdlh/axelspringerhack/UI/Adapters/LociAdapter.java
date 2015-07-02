@@ -13,6 +13,7 @@ import com.abdlh.axelspringerhack.R;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderExt;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory;
 import com.abdlh.axelspringerhack.UI.ViewHolder.ViewHolderFactory.ViewHolderType;
+import com.abdlh.axelspringerhack.fragment_click;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class LociAdapter extends RecyclerView.Adapter<ViewHolder>
         final ViewHolderExt<?> viewHolder;
         Log.d("LociAdapter", "onCreateViewHolder");
             final ViewHolderFactory.ViewHolderType viewHolderType = ViewHolderType.values()[viewType];
-            viewHolder = ViewHolderFactory.getViewHolder(parent, viewHolderType);
+            viewHolder = ViewHolderFactory.getViewHolder(parent, viewHolderType, (fragment_click) mActivity);
 //            viewHolder.setOnSelectedChangedListener(this);
 //            viewHolder.setOnRefreshRequestedListener(this);
 

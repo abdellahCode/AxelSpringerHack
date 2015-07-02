@@ -75,28 +75,6 @@ public class MainActivity extends AppCompatActivity implements fragment_click {
     }
 
     @Override
-    protected void onNewIntent(Intent intent)
-    {
-        this.setIntent(intent);
-        if (intent != null)
-        {
-            if (intent.getBundleExtra("extras") != null)
-            {
-                Bundle bundle = intent.getBundleExtra("extras");
-                if (bundle != null)
-                {
-                    if (bundle.getBoolean("detail"))
-                    {
-                        showDetailFragment(bundle.getString("name"));
-                    }
-                }
-            }
-
-        }
-        super.onNewIntent(intent);
-    }
-
-    @Override
     protected void onPostCreate(final Bundle savedInstanceState)
     {
         super.onPostCreate(savedInstanceState);
@@ -219,21 +197,11 @@ public class MainActivity extends AppCompatActivity implements fragment_click {
         }
     }
 
-    public void showDetailFragment(final String name)
-    {
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(this, name)).commit();
-    }
 
-
-
-    public void handleDetails(final PointOfInterest mPoi)
-    {
-        setDetailPoi(mPoi);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(this, "")).commit();
-    }
 
     @Override
-    public void onclick() {
+    public void onclick(String name) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, DetailsFragment.newInstance(name)).addToBackStack(null).commit();
 
     }
 }

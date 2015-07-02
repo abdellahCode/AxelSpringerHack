@@ -12,6 +12,7 @@ import com.abdlh.axelspringerhack.MainActivity;
 import com.abdlh.axelspringerhack.Model.PointOfInterest;
 import com.abdlh.axelspringerhack.R;
 import com.abdlh.axelspringerhack.Utils.ViewUtils;
+import com.abdlh.axelspringerhack.fragment_click;
 import com.squareup.picasso.Picasso;
 
 
@@ -23,15 +24,15 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
     final ImageView imageView;
     final TextView title;
     final TextView distance;
-
-    public PointOfInterestViewHolder(View itemView)
+    fragment_click fragment_click;
+    public PointOfInterestViewHolder(View itemView, fragment_click fragment_click)
     {
         super(itemView);
 
         imageView = (ImageView) itemView.findViewById(R.id.image);
         title = (TextView) itemView.findViewById(R.id.title);
         distance = (TextView) itemView.findViewById(R.id.distance);
-
+        this.fragment_click = fragment_click;
     }
 
     @Override
@@ -51,12 +52,7 @@ public class PointOfInterestViewHolder extends ViewHolderExt<PointOfInterest>
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(itemView.getContext(), MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", mPoi.getName());
-                bundle.putBoolean("detail", true);
-                intent.putExtra("extras", bundle);
-                itemView.getContext().startActivity(intent);
+                fragment_click.onclick(mPoi.getName());
 
             }
         });
